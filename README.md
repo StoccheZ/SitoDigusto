@@ -12,7 +12,6 @@ styles.css        stili (tema scuro, mobile-first)
 script.js         animazioni allo scroll, menu mobile, orari
 assets/           foto, favicon e icone
 robots.txt
-.github/workflows/deploy.yml   pubblicazione su GitHub Pages
 ```
 
 ## Vedere il sito in locale
@@ -27,13 +26,12 @@ e visita http://localhost:8000.
 
 ## Pubblicazione
 
-Ogni push su `main` pubblica il sito su GitHub Pages tramite il workflow in `.github/workflows/deploy.yml`.
+Il repository è collegato a Vercel: ogni push su `main` aggiorna il sito online.
+Non serve alcun passaggio di build, Vercel pubblica i file statici così come sono.
 
-Configurazione una tantum: nel repository vai su **Settings → Pages** e in **Build and deployment → Source** scegli **GitHub Actions**.
-
-Indirizzo: https://stocchez.github.io/SitoDigusto/
-
-Se in futuro usi un dominio personalizzato, aggiorna `og:url` e `og:image` in `index.html`.
+Per le anteprime dei link (WhatsApp, social) aggiungi in `index.html`, nel blocco "social sharing",
+`og:url` e `og:image` con l'indirizzo completo del sito, ad esempio
+`https://tuo-dominio/assets/img/corte-esterna.jpg`.
 
 ## Modificare i contenuti
 
