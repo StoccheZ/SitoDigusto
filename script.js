@@ -123,7 +123,16 @@ const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
 nav.querySelectorAll('a').forEach((link, i) => link.style.setProperty('--i', i));
 
+let closingTimer;
 const setMenu = (open) => {
+  const wasOpen = header.classList.contains('is-open');
+  clearTimeout(closingTimer);
+  header.classList.remove('is-closing');
+  if (!open && wasOpen) {
+    // hold the solid header until the closing animation (see CSS) is over
+    header.classList.add('is-closing');
+    closingTimer = setTimeout(() => header.classList.remove('is-closing'), reduceMotion ? 0 : 1000);
+  }
   header.classList.toggle('is-open', open);
   burger.setAttribute('aria-expanded', String(open));
   burger.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
