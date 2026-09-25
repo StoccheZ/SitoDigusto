@@ -14,17 +14,13 @@ else {
   setTimeout(start, 1500); // never keep the page waiting on a slow image
 }
 
-// Scroll-linked effects: header state, progress, reveals, parallax, section transitions.
-// Performance: element positions are measured once (and again on resize), so each
-// frame only does math on scrollY and writes transform/opacity, which the GPU
-// composites without repainting.
-const heroContent = document.querySelector('.hero__content');
-const heroShade = document.querySelector('.hero__shade');
-const clamp01 = (v) => Math.min(Math.max(v, 0), 1);
-const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+// Scroll: header state, reveals and (where CSS can't) the progress bar.
+// All scroll-linked motion (hero, sections, marquee, parallax) lives in CSS
+// scroll timelines, so nothing here moves elements while you scroll.
+const cssScrollTimeline = window.CSS && CSS.supports('animation-timeline: scroll()');
 
 document.querySelectorAll('[data-stagger]').forEach((group) => {
-  [...group.children].forEach((child, i) => child.style.setProperty('--d', `${i * 0.12}s`));
+  [...group.children].forEach((child, i) => child.style.setProperty('--d', `${i * 0.06}s`));
 });
 document.querySelectorAll('.reveal-group').forEach((group) => {
   [...group.children].forEach((child, i) => child.style.setProperty('--i', i));
@@ -44,14 +40,8 @@ const countUp = (el) => {
   requestAnimationFrame(step);
 };
 
-const tracked = (selector, extra = {}) =>
-  [...document.querySelectorAll(selector)].map((el) => ({ el, top: 0, height: 0, ...extra }));
-
-let reveals = tracked('.reveal, .reveal-group');
-const parallax = tracked('[data-parallax]').map((o) => ({ ...o, speed: parseFloat(o.el.dataset.parallax) }));
-const panels = tracked('.panel');
-const expanders = tracked('[data-expand]');
-const marquees = tracked('[data-marquee]').map((o) => ({ ...o, dir: parseFloat(o.el.dataset.marquee) }));
+// positions are measured once (and on resize) so scrolling never reads layout
+let reveals = [...document.querySelectorAll('.reveal, .reveal-group')].map((el) => ({ el, top: 0 }));
 let vh = window.innerHeight;
 let maxScroll = 1;
 
@@ -59,18 +49,12 @@ const measure = () => {
   vh = window.innerHeight;
   maxScroll = Math.max(document.documentElement.scrollHeight - vh, 1);
   const y = window.scrollY;
-  // parallax layers are measured through their (untransformed) section
-  parallax.forEach((o) => { const r = o.el.parentElement.getBoundingClientRect(); o.top = r.top + y; o.height = r.height; });
-  [reveals, panels, expanders, marquees].forEach((list) => list.forEach((o) => {
-    const r = o.el.getBoundingClientRect();
-    o.top = r.top + y;
-    o.height = r.height;
-  }));
+  reveals.forEach((o) => { o.top = o.el.getBoundingClientRect().top + y; });
 };
 
 const checkReveals = (y) => {
   if (!reveals.length) return;
-  const line = y + vh * 0.88;
+  const line = y + vh * 0.9;
   reveals = reveals.filter((o) => {
     if (reduceMotion || o.top < line) {
       o.el.classList.add('is-visible');
@@ -82,60 +66,18 @@ const checkReveals = (y) => {
 };
 
 let scrolled = null;
+let ticking = false;
 const update = () => {
   const y = window.scrollY;
-
   if ((y > 40) !== scrolled) { scrolled = y > 40; header.classList.toggle('is-scrolled', scrolled); }
-  progress.style.transform = `scaleX(${(y / maxScroll).toFixed(4)})`;
+  if (!cssScrollTimeline) progress.style.transform = `scaleX(${(y / maxScroll).toFixed(4)})`;
   checkReveals(y);
-
-  if (!reduceMotion) {
-    // Hero exit: content drifts up and fades, a shade darkens the photo
-    if (y < vh * 1.2) {
-      const h = clamp01(y / (vh * 0.8));
-      heroContent.style.transform = `translate3d(0, ${(-h * 90).toFixed(1)}px, 0)`;
-      heroContent.style.opacity = Math.max(1 - h * 1.1, 0).toFixed(3);
-      heroShade.style.opacity = (h * 0.55).toFixed(3);
-    }
-
-    parallax.forEach((o) => {
-      const top = o.top - y;
-      if (top > vh || top + o.height < 0) return;
-      const offset = (top + o.height / 2 - vh / 2) * -o.speed;
-      o.el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
-    });
-
-    // Panels rise and settle to full size as they enter
-    panels.forEach((o) => {
-      const p = easeOut(clamp01((vh - (o.top - y)) / (vh * 0.65)));
-      if (p === o.last) return;
-      o.last = p;
-      o.el.style.transform = `scale(${(0.93 + p * 0.07).toFixed(4)})`;
-    });
-
-    // Events: the inset card grows to full width
-    expanders.forEach((o) => {
-      const p = easeOut(clamp01((vh - (o.top - y)) / (vh * 0.75)));
-      if (p === o.last) return;
-      o.last = p;
-      o.el.style.transform = `scale(${(0.92 + p * 0.08).toFixed(4)})`;
-    });
-
-    // Marquee rows slide with the scroll, in opposite directions
-    marquees.forEach((o) => {
-      const top = o.top - y;
-      if (top > vh || top + o.height < 0) return;
-      const shift = (top - vh) * 0.35 * o.dir;
-      o.el.style.transform = `translate3d(calc(-25% + ${shift.toFixed(1)}px), 0, 0)`;
-    });
-  }
   ticking = false;
 };
 
-let ticking = false;
 window.addEventListener('scroll', () => {
   if (!ticking) { requestAnimationFrame(update); ticking = true; }
-  checkReveals(window.scrollY); // cheap: no layout reads
+  checkReveals(window.scrollY);
 }, { passive: true });
 
 const remeasure = () => { measure(); update(); };
@@ -144,6 +86,14 @@ window.addEventListener('load', remeasure);
 if (document.fonts) document.fonts.ready.then(remeasure);
 if ('ResizeObserver' in window) new ResizeObserver(remeasure).observe(document.body);
 remeasure();
+
+// "Torna su" and the logo: always scroll to the very top
+document.querySelectorAll('a[href="#top"]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+});
 
 // Mobile menu
 const burger = document.getElementById('burger');
@@ -187,14 +137,3 @@ document.querySelectorAll('.hours tr').forEach((row) => {
   if (/chiuso/i.test(row.textContent)) row.classList.add('is-closed');
 });
 
-// Map: load it in the background once the page is ready, so it is already
-// drawn when the visitor scrolls down; fade it in when Google has rendered it.
-const mapFrame = document.querySelector('.footer__map iframe[data-src]');
-if (mapFrame) {
-  mapFrame.addEventListener('load', () => mapFrame.classList.add('is-ready'), { once: true });
-  const loadMap = () => { if (!mapFrame.src) mapFrame.src = mapFrame.dataset.src; };
-  const whenIdle = (fn) => (window.requestIdleCallback ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 800));
-  if (document.readyState === 'complete') whenIdle(loadMap);
-  else window.addEventListener('load', () => whenIdle(loadMap), { once: true });
-  setTimeout(loadMap, 4000); // safety net
-}
