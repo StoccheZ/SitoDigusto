@@ -1,0 +1,20 @@
+# Internal working notes (not part of the site)
+contesto.txt
+
+# Secrets / local env
+.env
+.env.*
+*.pem
+*.key
+
+# Editor & OS
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build / tooling
+node_modules/
+_site/
