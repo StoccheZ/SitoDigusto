@@ -1273,12 +1273,6 @@ body,
       animation-timeline: view();
     }
 
-    /* marquee rows slide in opposite directions */
-    .marquee__row {
-      animation: marquee-right linear both;
-      animation-timeline: view();
-    }
-    .marquee__row--outline { animation-name: marquee-left; }
   }
 }
 
@@ -1289,5 +1283,21 @@ body,
 @keyframes panel-rise     { from { transform: scale(.93); } to { transform: scale(1); } }
 @keyframes events-grow    { from { transform: scale(.92); } to { transform: scale(1); } }
 @keyframes events-parallax { from { transform: translate3d(0, -8%, 0); } to { transform: translate3d(0, 8%, 0); } }
-@keyframes marquee-right  { from { transform: translate3d(-25%, 0, 0); } to { transform: translate3d(calc(-25% + 360px), 0, 0); } }
-@keyframes marquee-left   { from { transform: translate3d(-25%, 0, 0); } to { transform: translate3d(calc(-25% - 360px), 0, 0); } }
+
+/* ---------- Marquee: continuous, self-running ribbon ----------
+   Each row holds its words twice; sliding by exactly half its width loops seamlessly.
+   Spacing uses margins (not flex gap) so the two halves are identical in width. */
+.marquee__row {
+  gap: 0;
+  transform: none;
+  animation: marquee-left 60s linear infinite;
+}
+.marquee__row > * { margin-right: 28px; }
+.marquee__row--outline { animation: marquee-right 75s linear infinite; }
+
+@keyframes marquee-left  { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+@keyframes marquee-right { from { transform: translate3d(-50%, 0, 0); } to { transform: translate3d(0, 0, 0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__row, .marquee__row--outline { animation: none; }
+}
