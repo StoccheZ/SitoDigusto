@@ -27,11 +27,12 @@ e visita http://localhost:8000.
 ## Pubblicazione
 
 Il repository è collegato a Vercel: ogni push su `main` aggiorna il sito online.
+
+Indirizzo: https://digusto-lac.vercel.app/
 Non serve alcun passaggio di build, Vercel pubblica i file statici così come sono.
 
-Per le anteprime dei link (WhatsApp, social) aggiungi in `index.html`, nel blocco "social sharing",
-`og:url` e `og:image` con l'indirizzo completo del sito, ad esempio
-`https://tuo-dominio/assets/img/corte-esterna.jpg`.
+Se cambi dominio, aggiorna in `index.html` `og:url`, `og:image` e `canonical`
+(servono per le anteprime dei link su WhatsApp e social).
 
 ## Modificare i contenuti
 
