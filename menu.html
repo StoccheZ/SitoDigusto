@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu | Di Gusto Macerata</title>
+  <meta name="description" content="Il menu di Di Gusto Macerata: pinse, pizze, hamburger, cucina giapponese, dolci, birre e carta dei vini.">
+  <meta name="theme-color" content="#171310">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="canonical" href="https://digusto-lac.vercel.app/menu.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Michroma&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #171310; --bg-2: #1E1915; --surface: #26201B; --footer: #100D0B;
+      --text: #F3ECE2; --text-muted: #C9BDB0; --text-soft: #A89C90;
+      --accent: #D9B48F; --line: rgba(217,180,143,.16); --line-strong: rgba(217,180,143,.38);
+      --font-logo: "Michroma", "Jost", sans-serif;
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --font-sans: "Jost", system-ui, sans-serif;
+      --gutter: 20px; --radius: 999px;
+      --ease-out: cubic-bezier(.16, 1, .3, 1);
+      --pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Cdefs%3E%3Cg id='f'%3E%3Cellipse cx='0' cy='-6' rx='2' ry='3.6'/%3E%3Cellipse cx='0' cy='6' rx='2' ry='3.6'/%3E%3Cellipse cx='-6' cy='0' rx='3.6' ry='2'/%3E%3Cellipse cx='6' cy='0' rx='3.6' ry='2'/%3E%3C/g%3E%3C/defs%3E%3Cg fill='%23D9B48F' fill-opacity='.055'%3E%3Cuse href='%23f' x='28' y='28'/%3E%3Cuse href='%23f' x='84' y='84'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 130px; background: var(--bg); }
+    body {
+      margin: 0; font-family: var(--font-sans); font-weight: 300; line-height: 1.6;
+      color: var(--text-muted); background: var(--bg) var(--pattern) 0 0 / 112px 112px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* header */
+    .top {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(23,19,16,.94); box-shadow: inset 0 -1px 0 var(--line);
+    }
+    .top__bar { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: inline-flex; flex-direction: column; align-items: flex-end; text-decoration: none; color: var(--text); line-height: 1; }
+    .logo__word { font-family: var(--font-logo); font-size: 1.1rem; letter-spacing: .06em; padding-bottom: 5px; border-bottom: 1.5px solid currentColor; width: 100%; }
+    .logo__i { font-size: .7em; }
+    .logo__city { font-size: .46rem; font-weight: 500; letter-spacing: .3em; margin-top: 4px; color: var(--accent); }
+    .back {
+      font-size: .7rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; text-decoration: none;
+      color: var(--text); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 9px 16px;
+      transition: background .25s var(--ease-out), color .25s var(--ease-out);
+    }
+    .back:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+    /* category tabs, scroll sideways on phones */
+    .tabs {
+      display: flex; gap: 8px; overflow-x: auto; padding: 0 var(--gutter) 12px; margin: 0 auto; max-width: 1100px;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tabs a {
+      flex: none; text-decoration: none; font-size: .72rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text-muted); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 15px;
+      transition: color .25s, border-color .25s, background .25s;
+    }
+    .tabs a:hover, .tabs a.is-active { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+
+    /* intro */
+    .intro { padding: 56px 0 24px; text-align: center; }
+    .eyebrow {
+      font-size: .72rem; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--accent);
+      margin: 0 0 14px; display: inline-flex; align-items: center; gap: 14px;
+    }
+    .eyebrow::before, .eyebrow::after { content: ""; width: 28px; height: 1px; background: currentColor; }
+    .intro h1 {
+      font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: clamp(3rem, 12vw, 5rem);
+      line-height: 1; color: var(--accent); margin: 0 0 16px; text-shadow: 0 0 34px rgba(217,180,143,.18);
+    }
+    .intro p { max-width: 460px; margin: 0 auto; }
+
+    /* chapters */
+    .chapter { padding: 48px 0 8px; }
+    .chapter__title {
+      font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.2rem, 8vw, 3.2rem); line-height: 1.05;
+      color: var(--text); margin: 0 0 32px; padding-bottom: 18px; border-bottom: 1px solid var(--line);
+    }
+    .chapter__title em { font-style: italic; color: var(--accent); }
+    .chapter__grid { display: grid; gap: 40px; }
+
+    .block__title {
+      font-family: var(--font-sans); font-size: .74rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--accent); margin: 0 0 18px; display: flex; align-items: center; gap: 12px;
+    }
+    .block__title::before { content: ""; width: 26px; height: 1px; background: currentColor; }
+    .block__note { font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; color: var(--text-soft); margin: -8px 0 16px; }
+
+    .items { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+    .item__row { display: flex; align-items: baseline; gap: 10px; }
+    .item__name { font-family: var(--font-serif); font-weight: 500; font-size: 1.3rem; line-height: 1.2; color: var(--text); }
+    .item__dots { flex: 1; min-width: 16px; border-bottom: 1px dotted var(--line-strong); transform: translateY(-5px); }
+    .item__price { font-weight: 400; font-size: .95rem; color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .item__desc { margin: 3px 0 0; font-size: .88rem; line-height: 1.5; padding-right: 48px; }
+    .chapter--wine .items { gap: 10px; }
+    .chapter--wine .item__name { font-weight: 400; font-size: 1.12rem; }
+
+    /* footer */
+    .note {
+      margin: 56px auto 0; max-width: 620px; text-align: center; font-size: .88rem; color: var(--text-soft);
+      border-top: 1px solid var(--line); padding: 28px var(--gutter) 0;
+    }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 28px 0 0; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 30px;
+      font-size: .72rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; text-decoration: none;
+      border-radius: var(--radius); border: 1px solid var(--accent); background: var(--accent); color: var(--bg);
+      box-shadow: 0 10px 30px -10px rgba(217,180,143,.45); transition: background .25s, border-color .25s, transform .25s var(--ease-out);
+    }
+    .btn:hover { background: var(--text); border-color: var(--text); transform: translateY(-2px); }
+    .btn--ghost { background: none; color: var(--text); border-color: rgba(243,236,226,.55); box-shadow: none; }
+    .btn--ghost:hover { color: var(--bg); }
+    footer { background: var(--footer); margin-top: 64px; padding: 26px 0; font-size: .82rem; color: var(--text-soft); text-align: center; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (min-width: 760px) {
+      :root { --gutter: 32px; }
+      /* single-list pages: split the list itself over two columns */
+      .chapter--single .chapter__grid { columns: 1; }
+      .chapter--single .items { display: block; columns: 2; column-gap: 64px; }
+      .chapter--single .item { break-inside: avoid; margin-bottom: 16px; }
+      .chapter__grid { display: block; columns: 2; column-gap: 64px; }
+      .block { break-inside: avoid; margin-bottom: 44px; }
+      .chapter__grid .block:last-child { margin-bottom: 0; }
+      .chapter { padding-top: 72px; }
+    }
+    @media (min-width: 1024px) {
+      .top__bar { height: 76px; }
+      .logo__word { font-size: 1.35rem; }
+      .logo__city { font-size: .52rem; }
+      .tabs { justify-content: center; }
+      html { scroll-padding-top: 150px; }
+    }
+    /* opening the page: header fades in, then the title lines rise one after another, then the menu */
+    @keyframes fade-in { from { opacity: 0; } }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } }
+    .top { animation: fade-in .8s var(--ease-out) both; }
+    .intro > * { animation: fade-up 1.1s var(--ease-out) both; }
+    .intro > :nth-child(1) { animation-delay: .15s; }
+    .intro > :nth-child(2) { animation-delay: .3s; }
+    .intro > :nth-child(3) { animation-delay: .45s; }
+    .chapter, .note { animation: fade-up 1.1s var(--ease-out) .65s both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top">
+    <div class="container top__bar">
+      <a href="index.html" class="logo" aria-label="Di Gusto Macerata, torna alla home">
+        <span class="logo__word">D<span class="logo__i">i</span>GUSTO</span>
+        <span class="logo__city">MACERATA</span>
+      </a>
+      <a href="index.html" class="back">← Home</a>
+    </div>
+    <nav class="tabs" aria-label="Sezioni del menu">
+      <a href="#pinse">Pinse</a>
+      <a href="#pizze-speciali">Pizze speciali</a>
+      <a href="#pizze-rosse">Pizze rosse</a>
+      <a href="#pizze-bianche">Pizze bianche</a>
+      <a href="#cucina">Burger e fritti</a>
+      <a href="#cucina-giapponese">Giapponese</a>
+      <a href="#dolci">Dolci</a>
+      <a href="#bevande">Bevande</a>
+      <a href="#carta-dei-vini">Vini</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="intro">
+      <p class="eyebrow">Di Gusto Macerata</p>
+      <h1>Il Menu</h1>
+      <p>Pinse, pizze, hamburger, cucina giapponese e una carta dei vini che guarda prima di tutto alle Marche.</p>
+    </div>
+
+    <div class="chapter chapter--single" id="pinse">
+      <h2 class="chapter__title">Le <em>pinse</em></h2>
+      <div class="chapter__grid">
+      <section class="block">
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Stracchino e cotto</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Mozzarella, patate, prosciutto cotto, stracchino e prezzemolo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Panura e verdure</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, verdure di stagione, panura e buccia di limone</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Foje cotte</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, foje cotte, pomodoro Pachino, alici e pinoli</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pachino e pesto</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Pomodoro, mozzarella di bufala, pomodoro Pachino, pesto e basilico</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Guanciale e panura</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, guanciale, panura, uova sode, crema tartufata e prezzemolo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pancetta e mela</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Mozzarella, pancetta, cipolla rossa, mela, pecorino, pepe nero e buccia d&#x27;arancia</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Speck e gorgonzola</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, radicchio, speck e gorgonzola</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Tonno e olive</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Mozzarella, cipolla rossa caramellata, tonno, olive e basilico</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Gorgonzola e miele</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, pere, noci, gorgonzola, miele e prezzemolo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Guanciale e pecorino</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, guanciale, pecorino, uova e pepe nero</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Grana e pecorino</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Mozzarella, grana, pecorino, pepe nero e basilico</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Tartufata e ricotta</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Mozzarella tartufata, ricotta, funghi e prezzemolo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pistacchio e mortadella</span><span class="item__dots"></span><span class="item__price">8,50</span></div>
+            <p class="item__desc">Mozzarella pistacchiata, mortadella, stracciatella e granella di pistacchi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Zucchine e salmone</span><span class="item__dots"></span><span class="item__price">9,00</span></div>
+            <p class="item__desc">Mozzarella, zucchine julienne, salmone, buccia di limone e semi di papavero</p>
+          </li>
+        </ul>
+      </section>
+      </div>
+    </div>
+
+    <div class="chapter chapter--single" id="pizze-speciali">
+      <h2 class="chapter__title">Pizze <em>speciali</em></h2>
+      <div class="chapter__grid">
+      <section class="block">
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Digusto</span><span class="item__dots"></span><span class="item__price">13,00</span></div>
+            <p class="item__desc">Un quarto Norcina, un quarto Soave, un quarto Invernale e un quarto Crudaiola</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Montelupone DOP</span><span class="item__dots"></span><span class="item__price">9,00</span></div>
+            <p class="item__desc">Crema di carciofi, mozzarella di bufala in cottura e basilico</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Macerata nostra</span><span class="item__dots"></span><span class="item__price">9,00</span></div>
+            <p class="item__desc">Frecandò, mozzarella e basilico</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Macerata e dintorni</span><span class="item__dots"></span><span class="item__price">10,00</span></div>
+            <p class="item__desc">Foje cotte e pecorino stracchinato dell&#x27;azienda agricola Dedoni</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Crescia degli angeli</span><span class="item__dots"></span><span class="item__price">10,00</span></div>
+            <p class="item__desc">Ciauscolo Altonera, pecorino dell&#x27;azienda agricola Angeli e rucola nostrana, tutto a crudo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Gusto antico</span><span class="item__dots"></span><span class="item__price">10,00</span></div>
+            <p class="item__desc">Porchetta, pecorino e insalatina di finocchio</p>
+          </li>
+        </ul>
+      </section>
+      </div>
+    </div>
+
+    <div class="chapter chapter--single" id="pizze-rosse">
+      <h2 class="chapter__title">Pizze <em>rosse</em></h2>
+      <div class="chapter__grid">
+      <section class="block">
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Margherita</span><span class="item__dots"></span><span class="item__price">5,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, pomodoro Pachino e basilico</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Mediterranea</span><span class="item__dots"></span><span class="item__price">6,50</span></div>
+            <p class="item__desc">Pomodoro, scamorza, basilico e olio extravergine d&#x27;oliva</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Diavola</span><span class="item__dots"></span><span class="item__price">6,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella e salame piccante</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Amatriciana</span><span class="item__dots"></span><span class="item__price">6,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, cipolla, pancetta e pecorino romano</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pepita</span><span class="item__dots"></span><span class="item__price">6,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, patate al forno e würstel</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Napoli</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, alici, olive e origano</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Delicata</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, mais e asparagi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Spinacina</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, spinaci, ricotta e uovo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Insolita</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, panna, ricotta e prosciutto cotto</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">4 stagioni</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, olive, prosciutto cotto, carciofini e funghi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Capricciosa</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, prosciutto cotto, funghi, carciofini e olive nere</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Crudaiola</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, funghi e prosciutto crudo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pizza al pesto</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, pesto genovese, pinoli e pomodoro Pachino</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Vera Napoli</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella di bufala a crudo, alici e capperi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Bufalina</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella di bufala campana, basilico e olio extravergine d&#x27;oliva</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Sferisterio</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, gorgonzola dolce, patate al forno e prosciutto crudo in cottura</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Fantasia</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, uovo all&#x27;occhio di bue, asparagi e grana</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Valdostana</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Pomodoro, mozzarella a crudo, prosciutto cotto, rucola e stracchino</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Carbonara</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, pancetta, uova, pecorino e pepe</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Sfiziosa</span><span class="item__dots"></span><span class="item__price">8,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, zucchine alla griglia, gamberetti e mascarpone</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Saporita</span><span class="item__dots"></span><span class="item__price">8,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, prosciutto crudo, funghi e rucola in cottura, scaglie di grana e pepe</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Autunno</span><span class="item__dots"></span><span class="item__price">8,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, mascarpone e speck</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Gustosa</span><span class="item__dots"></span><span class="item__price">9,00</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, mascarpone, speck e noci</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Speciale</span><span class="item__dots"></span><span class="item__price">9,00</span></div>
+            <p class="item__desc">Pomodoro, mozzarella tartufata, gorgonzola, funghi porcini e prosciutto crudo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Fresca</span><span class="item__dots"></span><span class="item__price">9,50</span></div>
+            <p class="item__desc">Pomodoro, scamorza, basilico, funghi crudi, prosciutto crudo e olio extravergine d&#x27;oliva</p>
+          </li>
+        </ul>
+      </section>
+      </div>
+    </div>
+
+    <div class="chapter chapter--single" id="pizze-bianche">
+      <h2 class="chapter__title">Pizze <em>bianche</em></h2>
+      <div class="chapter__grid">
+      <section class="block">
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Boscaiola</span><span class="item__dots"></span><span class="item__price">6,50</span></div>
+            <p class="item__desc">Mozzarella, prosciutto cotto e funghi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Milanese</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+            <p class="item__desc">Mozzarella, asparagi e pomodorini</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Caprese</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Mozzarella, pomodoro fresco, origano e basilico</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Rucolina</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Mozzarella, rucola, pomodoro Pachino e grana</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Quattro formaggi</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Mozzarella, parmigiano, gorgonzola e scamorza</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Rustica</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Mozzarella, broccoletti, salsiccia e olio piccante</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Gorgonzola e speck</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, spinaci, gorgonzola e speck</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Stracchino e crudo</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, stracchino, prosciutto crudo e rucola</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Deliziosa</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, patate al forno, salsiccia, pomodorini e rosmarino</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Braccio di ferro</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, spinaci, salsiccia e grana</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Primo amore</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, dadolata di pomodori, scamorza affumicata ed erba cipollina</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Ortolana</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, zucchine, melanzane, peperoni e rucola</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Campagnola</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, gorgonzola, salame piccante, melanzane grigliate e prezzemolo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Contadina</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, asparagi, gorgonzola e pancetta</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Curiosa</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Mozzarella, rucola, carciofini e zenzero</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Parmigiana</span><span class="item__dots"></span><span class="item__price">8,50</span></div>
+            <p class="item__desc">Mozzarella, melanzane alla griglia con salsa di pomodoro, salsiccia e grana</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Invernale</span><span class="item__dots"></span><span class="item__price">8,50</span></div>
+            <p class="item__desc">Mozzarella, pancetta, radicchio, scamorza e scaglie di grana</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Preferita</span><span class="item__dots"></span><span class="item__price">8,50</span></div>
+            <p class="item__desc">Mozzarella, salmone, rucola e pepe rosa</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Profumata</span><span class="item__dots"></span><span class="item__price">8,50</span></div>
+            <p class="item__desc">Mozzarella, zenzero, limone grattugiato e prosciutto crudo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Norcina</span><span class="item__dots"></span><span class="item__price">9,00</span></div>
+            <p class="item__desc">Mozzarella tartufata, salsiccia, grana e funghi porcini</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Carpaccio</span><span class="item__dots"></span><span class="item__price">9,50</span></div>
+            <p class="item__desc">Mozzarella, bresaola, funghi crudi, rucola, grana e limone</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Soave</span><span class="item__dots"></span><span class="item__price">9,50</span></div>
+            <p class="item__desc">Mozzarella, gorgonzola, pere, noci e miele</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Imperatore</span><span class="item__dots"></span><span class="item__price">9,50</span></div>
+            <p class="item__desc">Mozzarella, mais, gamberetti, salmone e prezzemolo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Primavera</span><span class="item__dots"></span><span class="item__price">10,00</span></div>
+            <p class="item__desc">Mozzarella, stracchino, salmone, zenzero e limone grattugiato</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Calzone</span><span class="item__dots"></span><span class="item__price">7,50</span></div>
+            <p class="item__desc">Pomodoro, mozzarella, prosciutto cotto e funghi</p>
+          </li>
+        </ul>
+      </section>
+      </div>
+    </div>
+
+    <div class="chapter" id="cucina">
+      <h2 class="chapter__title">Piadizze, burger <em>e fritti</em></h2>
+      <div class="chapter__grid">
+      <section class="block">
+        <h3 class="block__title">Piadizze</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Mozzarella e verdure grigliate</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Stracchino e cicoria</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Rucola, crudo e stracchino</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Bresaola, misticanza e crema di formaggio</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Squacquerone, melanzane, peperoni e zucchine</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Crea la tua piadizza</span><span class="item__dots"></span><span class="item__price">7 / 8 / 9</span></div>
+            <p class="item__desc">Con 2, 3 o 4 ingredienti a scelta</p>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Hamburger</h3>
+        <p class="block__note">Tutti con carne di manzo di razza marchigiana</p>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Digusto</span><span class="item__dots"></span><span class="item__price">12,00</span></div>
+            <p class="item__desc">Cipolla caramellata, gorgonzola, noci e rucola</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Gourmet</span><span class="item__dots"></span><span class="item__price">12,00</span></div>
+            <p class="item__desc">Guanciale croccante, insalatina, taleggio, funghi porcini e maionese</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Marchigiano</span><span class="item__dots"></span><span class="item__price">12,00</span></div>
+            <p class="item__desc">Guanciale, finocchietto, caciotta, maionese e julienne di finocchio</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Sfizioso</span><span class="item__dots"></span><span class="item__price">12,00</span></div>
+            <p class="item__desc">Cavolo rosso, bacon, rucola e fontina</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pastrami</span><span class="item__dots"></span><span class="item__price">12,00</span></div>
+            <p class="item__desc">Pastrami, maionese alla senape, radicchio, carciofini, pomodoro e insalatina</p>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Fritti</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Patatine fritte</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Verdure pastellate</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Olive all&#x27;ascolana</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Cremini</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Arancini di quinoa</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+            <p class="item__desc">Con cuore di caciotta</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Mix fritto</span><span class="item__dots"></span><span class="item__price">10,00</span></div>
+            <p class="item__desc">Patate e verdure</p>
+          </li>
+        </ul>
+      </section>
+      </div>
+    </div>
+
+    <div class="chapter" id="cucina-giapponese">
+      <h2 class="chapter__title">Cucina <em>giapponese</em></h2>
+      <div class="chapter__grid">
+      <section class="block">
+        <h3 class="block__title">Sushi misto</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Insolito</span><span class="item__dots"></span><span class="item__price">20,00</span></div>
+            <p class="item__desc">15 pezzi misti di sushi e sashimi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Digusto</span><span class="item__dots"></span><span class="item__price">35,00</span></div>
+            <p class="item__desc">30 pezzi misti di sushi e sashimi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Macerata</span><span class="item__dots"></span><span class="item__price">50,00</span></div>
+            <p class="item__desc">50 pezzi misti di sushi e sashimi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Sferisterio</span><span class="item__dots"></span><span class="item__price">80,00</span></div>
+            <p class="item__desc">80 pezzi misti di sushi e sashimi</p>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Antipasti e bowl</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Zuppa di miso</span><span class="item__dots"></span><span class="item__price">3,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Edamame</span><span class="item__dots"></span><span class="item__price">3,00</span></div>
+            <p class="item__desc">Fagiolini di soia al sale grosso</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Insalata wakame</span><span class="item__dots"></span><span class="item__price">3,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Riso bianco</span><span class="item__dots"></span><span class="item__price">2,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pokè salmone</span><span class="item__dots"></span><span class="item__price">12,00</span></div>
+            <p class="item__desc">Salmone, riso, pomodorini, cavolo rosso, avocado, edamame, chili mayo ed erba cipollina</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pokè tonno</span><span class="item__dots"></span><span class="item__price">12,00</span></div>
+            <p class="item__desc">Tonno, riso, pomodorini, mango, edamame, cetriolo, salsa teriyaki e sesamo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Tonno tataki</span><span class="item__dots"></span><span class="item__price">15,00</span></div>
+            <p class="item__desc">10 pezzi, con riso bianco</p>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Sashimi</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Salmone</span><span class="item__dots"></span><span class="item__price">12,00</span></div>
+            <p class="item__desc">10 pezzi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Tonno</span><span class="item__dots"></span><span class="item__price">12,00</span></div>
+            <p class="item__desc">10 pezzi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">New style flambé mix</span><span class="item__dots"></span><span class="item__price">10,00</span></div>
+            <p class="item__desc">6 pezzi, con riso bianco</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Salmone in salsa d&#x27;avocado</span><span class="item__dots"></span><span class="item__price">10,00</span></div>
+            <p class="item__desc">6 pezzi, con riso bianco</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Mini sashimi mix</span><span class="item__dots"></span><span class="item__price">18,00</span></div>
+            <p class="item__desc">15 pezzi di tonno, salmone e pesce bianco</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Sashimi mix</span><span class="item__dots"></span><span class="item__price">35,00</span></div>
+            <p class="item__desc">30 pezzi di tonno, salmone e pesce bianco</p>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Nigiri</h3>
+        <p class="block__note">2 pezzi</p>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Salmone · Tonno · Ebi</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pesce bianco del giorno</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Uova di pesce volante</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Gunkan philadelphia</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Uramaki</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Philadelphia</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Salmone e philadelphia</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Fusion</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Salmone scottato, teriyaki e maionese</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">California</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Cetrioli, surimi, avocado e frutta tropicale</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Spicy tuna</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Tonno, sriracha, maionese e sesamo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Salmone e avocado</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Tonno e avocado</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Ebi</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Gamberi, avocado, maionese e uova</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Ebi ten</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Gambero in tempura e cipolla fritta</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Salmone profumato</span><span class="item__dots"></span><span class="item__price">8,00</span></div>
+            <p class="item__desc">Salmone profumato, erba cipollina e maionese</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Rainbow</span><span class="item__dots"></span><span class="item__price">10,00</span></div>
+            <p class="item__desc">Salmone, avocado, tonno, pesce bianco e gamberi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">White tiger</span><span class="item__dots"></span><span class="item__price">10,90</span></div>
+            <p class="item__desc">Gamberi, avocado, maionese, uova di pesce e cavolo rosso</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Fantasia dello chef</span><span class="item__dots"></span><span class="item__price">10,90</span></div>
+            <p class="item__desc">Mix di pesce</p>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Hosomaki</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Kappa</span><span class="item__dots"></span><span class="item__price">6,00</span></div>
+            <p class="item__desc">Cetriolo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Avocado</span><span class="item__dots"></span><span class="item__price">6,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Kani</span><span class="item__dots"></span><span class="item__price">6,00</span></div>
+            <p class="item__desc">Surimi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Tekka</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+            <p class="item__desc">Tonno</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Salmone</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Ebi</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+            <p class="item__desc">Gamberi</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">California</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+            <p class="item__desc">Cetrioli e mango</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Fragole in tempura</span><span class="item__dots"></span><span class="item__price">12,90</span></div>
+            <p class="item__desc">Con philadelphia e fragole</p>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Temaki</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Salmone</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Tonno</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">California</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+            <p class="item__desc">Cetrioli, surimi, avocado e sesamo</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Philadelphia</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+            <p class="item__desc">Salmone, philadelphia ed erba cipollina</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Spicy salmone</span><span class="item__dots"></span><span class="item__price">6,00</span></div>
+            <p class="item__desc">Salmone, sriracha, erba cipollina e maionese</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Spicy tuna</span><span class="item__dots"></span><span class="item__price">6,00</span></div>
+            <p class="item__desc">Tonno, sriracha, erba cipollina e maionese</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Ebi</span><span class="item__dots"></span><span class="item__price">6,00</span></div>
+            <p class="item__desc">Gambero in tempura</p>
+          </li>
+        </ul>
+      </section>
+      </div>
+    </div>
+
+    <div class="chapter chapter--single" id="dolci">
+      <h2 class="chapter__title">I <em>dolci</em></h2>
+      <div class="chapter__grid">
+      <section class="block">
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Cheesecake</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+            <p class="item__desc">Al pistacchio o ai frutti di bosco</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Tiramisù</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Panna cotta</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+            <p class="item__desc">Cioccolato, caramello o frutti di bosco</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Crostate artigianali</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+            <p class="item__desc">Di nostra produzione</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Yogurt soft</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+            <p class="item__desc">Frutti di bosco, caramello o cioccolato</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Crema caffè</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Focaccia dolce alla Nutella</span><span class="item__dots"></span><span class="item__price">7,00</span></div>
+            <p class="item__desc">Anche con banane o pere, con zucchero a velo</p>
+          </li>
+        </ul>
+      </section>
+      </div>
+    </div>
+
+    <div class="chapter" id="bevande">
+      <h2 class="chapter__title">Le <em>bevande</em></h2>
+      <div class="chapter__grid">
+      <section class="block">
+        <h3 class="block__title">Bibite</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Acqua naturale o frizzante</span><span class="item__dots"></span><span class="item__price">1 / 2</span></div>
+            <p class="item__desc">50 cl / 66 cl</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Estathè</span><span class="item__dots"></span><span class="item__price">1,50</span></div>
+            <p class="item__desc">Limone o pesca</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Coca-Cola Zero, Lemon Soda</span><span class="item__dots"></span><span class="item__price">3,00</span></div>
+            <p class="item__desc">25 cl</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Schweppes Tonica o Ginger, Fanta</span><span class="item__dots"></span><span class="item__price">3,00</span></div>
+            <p class="item__desc">33 cl</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Lurisia</span><span class="item__dots"></span><span class="item__price">3,00</span></div>
+            <p class="item__desc">Aranciata, aranciata amara, gazzosa, chinotto</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Baladin</span><span class="item__dots"></span><span class="item__price">3,00</span></div>
+            <p class="item__desc">Spuma, cedrata, ginger</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Cedrata Tassoni</span><span class="item__dots"></span><span class="item__price">3,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Ginger beer Fever-Tree</span><span class="item__dots"></span><span class="item__price">3,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Red Bull</span><span class="item__dots"></span><span class="item__price">3,50</span></div>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Birre</h3>
+        <p class="block__note">Bottiglia da 33 cl</p>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Tennent&#x27;s · Menabrea · Asahi</span><span class="item__dots"></span><span class="item__price">4,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Guinness Draught</span><span class="item__dots"></span><span class="item__price">4,50</span></div>
+            <p class="item__desc">Stout, 4,2%</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Isaac Baladin</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+            <p class="item__desc">Blanche, 5%</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">L&#x27;Ippa Baladin</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+            <p class="item__desc">IPA, 5,5%</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Nazionale Baladin</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+            <p class="item__desc">Senza glutine, 6,5%</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Helvia · Il Mastio</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+            <p class="item__desc">Golden ale, 4,7%</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Abbadia · Il Mastio</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+            <p class="item__desc">Belgian blonde ale, 6,8%</p>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Drum Barrel · Il Mastio</span><span class="item__dots"></span><span class="item__price">5,00</span></div>
+            <p class="item__desc">Belgian strong ale affinata in barrique, 8%</p>
+          </li>
+        </ul>
+      </section>
+      </div>
+    </div>
+
+    <div class="chapter chapter--wine" id="carta-dei-vini">
+      <h2 class="chapter__title">Carta <em>dei vini</em></h2>
+      <div class="chapter__grid">
+      <section class="block">
+        <h3 class="block__title">Bollicine</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Passerina Spumante Brut · Murola «Vara»</span><span class="item__dots"></span><span class="item__price">15,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Passerina Spumante Brut · Velenosi</span><span class="item__dots"></span><span class="item__price">17,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Asti Spumante DOCG · Ca&#x27; d&#x27;Gal</span><span class="item__dots"></span><span class="item__price">18,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Asti Spumante DOCG · Fontanafredda</span><span class="item__dots"></span><span class="item__price">18,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Spumante Rosé Pinot Noir · Drusian «Rosé Mari»</span><span class="item__dots"></span><span class="item__price">18,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Valdobbiadene Prosecco Superiore DOCG Brut · Drusian</span><span class="item__dots"></span><span class="item__price">19,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Vernaccia di Serrapetrona DOCG Dolce · Quacquarini</span><span class="item__dots"></span><span class="item__price">19,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Vernaccia di Serrapetrona DOCG Secca · Quacquarini</span><span class="item__dots"></span><span class="item__price">20,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Spumante Brut Metodo Classico · Murola «Jurek»</span><span class="item__dots"></span><span class="item__price">23,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Valdobbiadene Superiore di Cartizze · Drusian</span><span class="item__dots"></span><span class="item__price">24,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Franciacorta Brut DOCG · Mosnel</span><span class="item__dots"></span><span class="item__price">28,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Franciacorta Pas Dosé DOCG · Mosnel</span><span class="item__dots"></span><span class="item__price">29,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Franciacorta Rosé · Mosnel</span><span class="item__dots"></span><span class="item__price">34,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Champagne Brut Réserve · Palmer</span><span class="item__dots"></span><span class="item__price">75,00</span></div>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Bianchi</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Colli Maceratesi DOC · Murola «Baccius»</span><span class="item__dots"></span><span class="item__price">14,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Colli Maceratesi Ribona DOC · Conti degli Azzoni</span><span class="item__dots"></span><span class="item__price">14,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Passerina Bio · Terra Fageto «Letizia»</span><span class="item__dots"></span><span class="item__price">14,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Verdicchio dei Castelli di Jesi Cl. Sup. · Zaccagnini</span><span class="item__dots"></span><span class="item__price">15,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Verdicchio di Matelica DOC · Belisario «Vigneti B.»</span><span class="item__dots"></span><span class="item__price">15,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Offida Pecorino DOCG Bio · Terra Fageto «Fenesia»</span><span class="item__dots"></span><span class="item__price">16,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Müller Thurgau Südtirol DOC · Kellerei Kaltern</span><span class="item__dots"></span><span class="item__price">17,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Catarratto Terre Siciliane IGP · Petrachiara</span><span class="item__dots"></span><span class="item__price">17,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Fiano di Avellino DOCG · Tenuta Scuotto</span><span class="item__dots"></span><span class="item__price">17,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Greco di Tufo DOCG · Tenuta Scuotto</span><span class="item__dots"></span><span class="item__price">17,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Grillo Terre Siciliane IGP · Vignemie «Heritage»</span><span class="item__dots"></span><span class="item__price">17,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Sauvignon Südtirol DOC · Kellerei Kaltern</span><span class="item__dots"></span><span class="item__price">17,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Verdicchio di Matelica DOC · La Monacesca</span><span class="item__dots"></span><span class="item__price">17,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Chardonnay Südtirol DOC · Tiefenbrunner</span><span class="item__dots"></span><span class="item__price">18,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Verdicchio dei Castelli di Jesi Cl. Sup. · Zaccagnini «Salmagina»</span><span class="item__dots"></span><span class="item__price">18,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Vermentino di Gallura Superiore DOCG · Piero Mancini</span><span class="item__dots"></span><span class="item__price">18,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Gewürztraminer Südtirol DOC · Kellerei Kaltern</span><span class="item__dots"></span><span class="item__price">19,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Ribolla Gialla Friuli Colli Orientali DOC · Colutta</span><span class="item__dots"></span><span class="item__price">19,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Sauvignon Südtirol DOC · Tiefenbrunner</span><span class="item__dots"></span><span class="item__price">19,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Verdicchio dei Castelli di Jesi Cl. Sup. · Vicari «L&#x27;Insolito del Pozzo Buono»</span><span class="item__dots"></span><span class="item__price">19,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Vermentino di Sardegna · Mora &amp; Memo «Tino»</span><span class="item__dots"></span><span class="item__price">19,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Gewürztraminer Südtirol DOC · Tiefenbrunner</span><span class="item__dots"></span><span class="item__price">21,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Verdicchio di Matelica DOC · Borgo Paglianetto «Vertis»</span><span class="item__dots"></span><span class="item__price">22,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Riesling Dry Mosel · Dr. Loosen</span><span class="item__dots"></span><span class="item__price">23,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Müller Thurgau Kabinett · Horst Sauer</span><span class="item__dots"></span><span class="item__price">23,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Verdicchio di Matelica Riserva DOCG · Belisario «Cambrugiano»</span><span class="item__dots"></span><span class="item__price">24,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Sauvignon Blanc Marlborough · Saint Clair</span><span class="item__dots"></span><span class="item__price">26,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Verdicchio di Matelica Riserva DOCG · La Monacesca «Mirum»</span><span class="item__dots"></span><span class="item__price">29,50</span></div>
+          </li>
+        </ul>
+      </section>
+      <section class="block">
+        <h3 class="block__title">Rossi</h3>
+        <ul class="items">
+          <li class="item">
+            <div class="item__row"><span class="item__name">Rosso Piceno DOC · Murola «Obesallia»</span><span class="item__dots"></span><span class="item__price">16,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Sangiovese Marche IGT · Murola «Cama»</span><span class="item__dots"></span><span class="item__price">16,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Lacrima di Morro d&#x27;Alba DOC · Vicari «Da Sempre»</span><span class="item__dots"></span><span class="item__price">16,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Rosso Piceno DOC · Saputi «Castru Vecchiu»</span><span class="item__dots"></span><span class="item__price">17,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Montepulciano Marche IGT · Murola «Teodoro»</span><span class="item__dots"></span><span class="item__price">17,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Lacrima di Morro d&#x27;Alba DOC · Velenosi «Quercia Antica»</span><span class="item__dots"></span><span class="item__price">17,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Dolcetto d&#x27;Alba DOC · Fratelli Seghesio</span><span class="item__dots"></span><span class="item__price">18,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Rosso Conero DOC Bio · Moroder</span><span class="item__dots"></span><span class="item__price">18,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Nobile di Montepulciano DOCG · Le Casalte</span><span class="item__dots"></span><span class="item__price">19,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Pinot Nero Südtirol DOC · Kellerei Kaltern</span><span class="item__dots"></span><span class="item__price">21,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Lacrima di Morro d&#x27;Alba Sup. DOC · Vicari «Del Pozzo Buono»</span><span class="item__dots"></span><span class="item__price">22,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Marche Rosso IGT · Conti degli Azzoni «Passatempo»</span><span class="item__dots"></span><span class="item__price">22,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Chianti Classico DOCG · Poggio Scalette</span><span class="item__dots"></span><span class="item__price">23,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Merlot Marche IGT · Saputi «Abate Pallia»</span><span class="item__dots"></span><span class="item__price">23,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Rosso di Montalcino · Il Poggione</span><span class="item__dots"></span><span class="item__price">23,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Langhe Nebbiolo DOC · Fratelli Seghesio</span><span class="item__dots"></span><span class="item__price">24,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Marche Merlot IGT · Murola «Brunforte»</span><span class="item__dots"></span><span class="item__price">29,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Marche Rosso IGT · Conte Roberto degli Azzoni</span><span class="item__dots"></span><span class="item__price">32,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Barbera del Monferrato DOC · Volpuva «Vicara»</span><span class="item__dots"></span><span class="item__price">33,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Chianti Classico DOCG · Castell&#x27;in Villa</span><span class="item__dots"></span><span class="item__price">34,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Conero DOCG Riserva · Moroder «Dorico»</span><span class="item__dots"></span><span class="item__price">34,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Marche Sangiovese IGT · Murola «Antek»</span><span class="item__dots"></span><span class="item__price">36,00</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Barolo DOCG · Fratelli Seghesio</span><span class="item__dots"></span><span class="item__price">43,50</span></div>
+          </li>
+          <li class="item">
+            <div class="item__row"><span class="item__name">Amarone della Valpolicella Classico DOCG · Righetti</span><span class="item__dots"></span><span class="item__price">62,00</span></div>
+          </li>
+        </ul>
+      </section>
+      </div>
+    </div>
+
+    <div class="note">
+      <p>Prezzi in euro. Per informazioni su allergeni e intolleranze chiedi al personale: troveremo insieme l'opzione giusta.</p>
+      <div class="ctas">
+        <a href="tel:+390733474364" class="btn">Prenota un tavolo</a>
+        <a href="tel:+390733474364" class="btn btn--ghost">Ordina d'asporto</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      Via XX Settembre 12, Macerata · <a href="tel:+390733474364">0733 474364</a> · <a href="index.html">Torna alla home</a>
+    </div>
+  </footer>
+
+  <script>
+    // one long page: the tabs jump to a section, and the tab of the section you are reading lights up
+    const tabs = [...document.querySelectorAll('.tabs a')];
+    const chapters = tabs.map((t) => document.querySelector(t.getAttribute('href')));
+    const setActive = () => {
+      const y = window.scrollY + 170;
+      let current = 0;
+      chapters.forEach((c, i) => { if (c.offsetTop <= y) current = i; });
+      // at the very bottom, the last (short) section counts as the one being read
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) current = chapters.length - 1;
+      if (tabs[current].classList.contains('is-active')) return;
+      tabs.forEach((t, i) => {
+        t.classList.toggle('is-active', i === current);
+        t.toggleAttribute('aria-current', i === current);
+      });
+      // keep the active tab in view on phones without moving the page
+      const nav = tabs[current].parentElement;
+      nav.scrollTo({ left: tabs[current].offsetLeft - nav.clientWidth / 2 + tabs[current].clientWidth / 2, behavior: 'smooth' });
+    };
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(() => { setActive(); ticking = false; }); ticking = true; }
+    }, { passive: true });
+    setActive();
+  </script>
+</body>
+
+</html>
