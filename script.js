@@ -99,11 +99,35 @@ if ('ResizeObserver' in window) new ResizeObserver(remeasure).observe(document.b
 measure();
 update();
 
-// "Torna su" and the logo: always scroll to the very top
+// "Torna su" and the logo: always scroll to the very top.
+// The glide is driven here, frame by frame, instead of the browser's
+// behavior: 'smooth', which some browsers/settings ignore or cut short.
+let glideFrame = null;
+const stopGlide = () => { cancelAnimationFrame(glideFrame); glideFrame = null; };
+const scrollToTop = () => {
+  stopGlide();
+  const from = window.scrollY;
+  if (from <= 0) return;
+  if (reduceMotion) { window.scrollTo({ top: 0, behavior: 'instant' }); return; }
+  const duration = Math.min(1400, 500 + from * 0.12); // longer page, slightly longer glide
+  const t0 = performance.now();
+  const ease = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const step = (now) => {
+    const p = Math.min((now - t0) / duration, 1);
+    window.scrollTo({ top: Math.round(from * (1 - ease(p))), behavior: 'instant' });
+    glideFrame = p < 1 ? requestAnimationFrame(step) : null;
+  };
+  glideFrame = requestAnimationFrame(step);
+};
+// the visitor takes over (wheel, touch, keys): let go immediately
+['wheel', 'touchstart', 'keydown'].forEach((type) =>
+  window.addEventListener(type, () => { if (glideFrame) stopGlide(); }, { passive: true }));
+
 document.querySelectorAll('a[href="#top"]').forEach((link) => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    setMenu(false);
+    scrollToTop();
   });
 });
 
