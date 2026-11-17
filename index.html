@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Di Gusto Macerata | Ristorante, aperitivi e cocktail</title>
   <meta name="description"
     content="Ristorante Di Gusto nel cuore di Macerata: cucina, aperitivi, cocktail e opzioni vegane sotto le volte in mattoni. Aperti da martedì a domenica fino all'01:00. Prenota allo 0733 474364.">
@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- social sharing -->
-  <meta property="og:type" content="restaurant">
+  <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:site_name" content="Di Gusto Macerata">
   <meta property="og:title" content="Di Gusto Macerata | Ristorante, aperitivi e cocktail">
@@ -23,15 +23,63 @@
   <meta property="og:image:alt" content="Il cortile del palazzo storico apparecchiato per una cena">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://digusto-lac.vercel.app/">
+
+  <!-- the hero photo is the largest element on screen: fetch it first -->
+  <link rel="preload" as="image" href="assets/img/bancone-volte.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Michroma&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <!-- without JavaScript the reveal animations never run: show everything -->
+  <noscript>
+    <style>
+      .reveal, .reveal-group > *, .intro, .hero__bg, .hero__title .line > * { opacity: 1 !important; transform: none !important; }
+      .reveal--clip::after { transform: scaleY(0) !important; }
+      [data-status] { display: none !important; }
+    </style>
+  </noscript>
+
+  <!-- structured data: lets Google show hours, phone and address in search and Maps -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Ristorante Di Gusto Macerata",
+    "url": "https://digusto-lac.vercel.app/",
+    "image": "https://digusto-lac.vercel.app/assets/img/corte-esterna.jpg",
+    "telephone": "+39 0733 474364",
+    "priceRange": "20-30 €",
+    "servesCuisine": ["Italiana", "Vegana", "Cocktail bar"],
+    "acceptsReservations": true,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via XX Settembre, 12",
+      "postalCode": "62100",
+      "addressLocality": "Macerata",
+      "addressRegion": "MC",
+      "addressCountry": "IT"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 43.2990501, "longitude": 13.4501105 },
+    "hasMap": "https://www.google.com/maps/place/Ristorante+Di+Gusto+Macerata/@43.2990501,13.4501105,17z",
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "01:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "12:00", "closes": "01:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "18:00", "closes": "01:00" }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/digusto.macerata/",
+      "https://www.facebook.com/digustomacerata/",
+      "https://www.tripadvisor.it/Restaurant_Review-g616177-d7259366-Reviews-Digusto_Macerata-Macerata_Province_of_Macerata_Marche.html"
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <a href="#chi-siamo" class="skip-link">Salta al contenuto</a>
   <div class="progress" aria-hidden="true"></div>
 
   <!-- ============ HEADER ============ -->
@@ -45,7 +93,6 @@
       <nav class="nav" id="nav" aria-label="Navigazione principale">
         <a href="#chi-siamo">Chi siamo</a>
         <a href="#servizi">Servizi</a>
-        <a href="menu.html">Menu</a>
         <a href="#galleria">Il locale</a>
         <a href="#eventi">Eventi</a>
         <a href="#contatti">Contatti</a>
@@ -61,8 +108,8 @@
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero" id="top">
-      <div class="hero__media" data-parallax="0.25">
-        <img class="hero__bg" src="assets/img/bancone-volte.jpg"
+      <div class="hero__media">
+        <img class="hero__bg" src="assets/img/bancone-volte.jpg" fetchpriority="high" decoding="async"
           alt="Il bancone di Di Gusto sotto le volte in mattoni, con il pavimento in cementine decorate">
       </div>
       <div class="hero__overlay"></div>
@@ -81,6 +128,12 @@
           <a href="tel:+390733474364" class="btn btn--solid">Prenota un tavolo</a>
           <a href="#asporto" class="btn btn--ghost">Ordina ora</a>
         </div>
+
+        <ul class="hero__meta intro" style="--i:6">
+          <li class="status" data-status hidden><span class="status__dot"></span><span class="status__text"></span></li>
+          <li>20–30 € a persona</li>
+          <li><a href="tel:+390733474364">0733 474364</a></li>
+        </ul>
       </div>
 
       <a href="#chi-siamo" class="hero__scroll intro" style="--i:7" aria-label="Scorri alla sezione successiva">
@@ -110,11 +163,11 @@
           <figure class="rating">
             <div class="rating__score" data-count="4.4">4,4</div>
             <div>
-              <div class="rating__stars" aria-label="4,4 stelle su 5">
-                <span class="rating__fill" style="width:88%">★★★★★</span>
-                <span class="rating__empty">★★★★★</span>
+              <div class="rating__stars" role="img" aria-label="4,4 stelle su 5">
+                <span class="rating__fill" style="width:88%" aria-hidden="true">★★★★★</span>
+                <span class="rating__empty" aria-hidden="true">★★★★★</span>
               </div>
-              <figcaption>Il voto di oltre <a class="rating__link" href="https://www.google.com/maps/place/Ristorante+Di+Gusto+Macerata/@43.299054,13.4475356,17z/data=!4m8!3m7!1s0x132d8b554890a255:0x97264b199ea6edc0!8m2!3d43.2990501!4d13.4501105!9m1!1b1!16s%2Fg%2F11bwyvn1l1" target="_blank" rel="noopener" aria-label="1.330 ospiti: leggi tutte le recensioni su Google (si apre in una nuova scheda)"><strong>1.330 ospiti</strong></a> che sono passati da noi.<br>Grazie: è il nostro
+              <figcaption>Il voto di oltre <strong>1.330 ospiti</strong> che sono passati da noi.<br>Grazie: è il nostro
                 miglior biglietto da visita.</figcaption>
             </div>
           </figure>
@@ -123,11 +176,12 @@
         <div class="about__media">
           <div class="about__frame about__frame--main reveal reveal--clip">
             <img src="assets/img/ingresso-cementine.jpg"
-              alt="L'ingresso con pavimento in cementine, tavoli in legno e piante rampicanti" loading="lazy">
+              alt="L'ingresso con pavimento in cementine, tavoli in legno e piante rampicanti" loading="lazy"
+              decoding="async">
           </div>
           <div class="about__frame about__frame--small reveal reveal--clip" style="--d:.35s">
             <img src="assets/img/volte-cucina.jpg" alt="La sala con le volte in mattoni e la cucina a vista"
-              loading="lazy">
+              loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -147,7 +201,7 @@
           <article class="card reveal">
             <div class="card__media">
               <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=75"
-                alt="Cocktail servito al bancone" loading="lazy">
+                alt="Cocktail servito al bancone" loading="lazy" decoding="async">
             </div>
             <div class="card__body">
               <svg class="card__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -164,7 +218,7 @@
           <article class="card reveal">
             <div class="card__media">
               <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=75"
-                alt="Piatto vegano con verdure fresche" loading="lazy">
+                alt="Piatto vegano con verdure fresche" loading="lazy" decoding="async">
             </div>
             <div class="card__body">
               <svg class="card__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -180,7 +234,7 @@
           <article class="card reveal" id="asporto">
             <div class="card__media">
               <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=75"
-                alt="Hamburger gourmet pronto per l'asporto" loading="lazy">
+                alt="Hamburger gourmet pronto per l'asporto" loading="lazy" decoding="async">
             </div>
             <div class="card__body">
               <svg class="card__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -197,7 +251,7 @@
           <article class="card reveal">
             <div class="card__media">
               <img src="assets/img/sala-bianca.jpg" alt="La sala bianca con lampade a sfera, parquet e tavoli in marmo"
-                loading="lazy">
+                loading="lazy" decoding="async">
             </div>
             <div class="card__body">
               <svg class="card__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -214,25 +268,6 @@
       </div>
     </section>
 
-    <!-- ============ MENU ============ -->
-    <section class="menu-cta section panel" id="menu">
-      <div class="container">
-        <div class="menu-cta__card reveal-group">
-          <svg class="menu-cta__icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 3h9l3 3v15H6z" />
-            <path d="M15 3v3h3M9 11h6M9 14h6M9 17h4" />
-          </svg>
-          <p class="eyebrow">La nostra carta</p>
-          <h2 class="title">Vedi qui<br><em>il nostro menu</em></h2>
-          <p class="menu-cta__lead">Pinse, pizze, hamburger, cucina giapponese e la carta dei vini: sfoglia il menu completo prima di venirci a trovare.
-          </p>
-          <a href="menu.html" class="btn btn--solid">
-            Sfoglia il menu <span class="arrow">→</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ GALLERY ============ -->
     <section class="gallery section panel" id="galleria">
       <div class="container">
@@ -243,20 +278,21 @@
 
         <div class="gallery__grid" data-stagger>
           <figure class="gallery__item gallery__item--tall reveal reveal--clip">
-            <img src="assets/img/bancone-volte.jpg" alt="Il bancone bar sotto le volte" loading="lazy">
+            <img src="assets/img/bancone-volte.jpg" alt="Il bancone bar sotto le volte" loading="lazy" decoding="async">
             <figcaption>Il bancone</figcaption>
           </figure>
           <figure class="gallery__item reveal reveal--clip">
-            <img src="assets/img/volte-cucina.jpg" alt="Sala con volte a crociera e cucina a vista" loading="lazy">
+            <img src="assets/img/volte-cucina.jpg" alt="Sala con volte a crociera e cucina a vista" loading="lazy"
+              decoding="async">
             <figcaption>Le volte in cotto</figcaption>
           </figure>
           <figure class="gallery__item reveal reveal--clip">
-            <img src="assets/img/sala-bianca.jpg" alt="Sala bianca con lampade a sfera" loading="lazy">
+            <img src="assets/img/sala-bianca.jpg" alt="Sala bianca con lampade a sfera" loading="lazy" decoding="async">
             <figcaption>La sala bianca</figcaption>
           </figure>
           <figure class="gallery__item gallery__item--wide reveal reveal--clip">
             <img src="assets/img/corte-esterna.jpg"
-              alt="Il cortile esterno del palazzo storico apparecchiato per una cena" loading="lazy">
+              alt="Il cortile esterno del palazzo storico apparecchiato per una cena" loading="lazy" decoding="async">
             <figcaption>Il cortile all'aperto</figcaption>
           </figure>
         </div>
@@ -265,21 +301,19 @@
 
     <!-- ============ MARQUEE ============ -->
     <div class="marquee" aria-hidden="true">
-      <div class="marquee__row" data-marquee="-1">
+      <div class="marquee__row">
         <span>Aperitivo</span><i></i><span>Cocktail</span><i></i><span>Cucina</span><i></i><span>Vegano</span><i></i><span>Asporto</span><i></i><span>Eventi</span><i></i>
         <span>Aperitivo</span><i></i><span>Cocktail</span><i></i><span>Cucina</span><i></i><span>Vegano</span><i></i><span>Asporto</span><i></i><span>Eventi</span><i></i>
       </div>
-      <div class="marquee__row marquee__row--outline" data-marquee="1">
-        <span>Sotto le volte</span><i></i><span>Via XX Settembre</span><i></i><span>Macerata</span><i></i><span>Centro
-          storico</span><i></i>
-        <span>Sotto le volte</span><i></i><span>Via XX Settembre</span><i></i><span>Macerata</span><i></i><span>Centro
-          storico</span><i></i>
+      <div class="marquee__row marquee__row--outline">
+        <span>Sotto le volte</span><i></i><span>Via XX Settembre</span><i></i><span>Macerata</span><i></i><span>Centro storico</span><i></i>
+        <span>Sotto le volte</span><i></i><span>Via XX Settembre</span><i></i><span>Macerata</span><i></i><span>Centro storico</span><i></i>
       </div>
     </div>
 
     <!-- ============ EVENTI ============ -->
-    <section class="events" id="eventi" data-expand>
-      <img class="events__bg" data-parallax="0.12" src="assets/img/corte-esterna.jpg" alt="" loading="lazy">
+    <section class="events" id="eventi">
+      <img class="events__bg" src="assets/img/corte-esterna.jpg" alt="" loading="lazy" decoding="async">
       <div class="events__overlay"></div>
       <div class="container events__content reveal-group">
         <p class="eyebrow">Eventi privati</p>
@@ -288,6 +322,12 @@
           Dalla sala privata al cortile del palazzo sotto le lucine: organizziamo compleanni,
           lauree, cene aziendali e tavolate tra amici. Raccontaci la tua idea, al menu ci pensiamo noi.
         </p>
+        <ul class="events__tags">
+          <li>Compleanni</li>
+          <li>Lauree</li>
+          <li>Cene aziendali</li>
+          <li>Tavolate</li>
+        </ul>
         <a href="tel:+390733474364" class="btn btn--solid">Richiedi informazioni</a>
       </div>
     </section>
@@ -297,7 +337,7 @@
   <footer class="footer panel" id="contatti">
     <div class="container footer__grid">
       <div class="footer__info reveal-group">
-        <a href="#top" class="logo logo--footer" aria-label="Di Gusto Macerata">
+        <a href="#top" class="logo logo--footer" aria-label="Di Gusto Macerata, torna all'inizio">
           <span class="logo__word">D<span class="logo__i">i</span>GUSTO</span>
           <span class="logo__city">MACERATA</span>
         </a>
@@ -311,8 +351,9 @@
             </svg>
             <div>
               <span class="contact__label">Indirizzo</span>
-              <a href="https://www.google.com/maps/place/Ristorante+Di+Gusto+Macerata/@43.299054,13.4475356,17z/data=!3m2!4b1!5s0x132df35543045731:0xe4c41dbd36ab93c6!4m6!3m5!1s0x132d8b554890a255:0x97264b199ea6edc0!8m2!3d43.2990501!4d13.4501105!16s%2Fg%2F11bwyvn1l1"
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Ristorante+Di+Gusto,+Via+XX+Settembre+12,+62100+Macerata+MC"
                 target="_blank" rel="noopener">Via XX Settembre, 12<br>62100 Macerata (MC)</a>
+              <span class="contact__hint">Tocca per le indicazioni</span>
             </div>
           </li>
           <li>
@@ -331,6 +372,8 @@
             </svg>
             <div>
               <span class="contact__label">Orari</span>
+              <p class="status status--footer" data-status hidden><span class="status__dot"></span><span
+                  class="status__text"></span></p>
               <table class="hours">
                 <tr data-day="1">
                   <th>Lunedì</th>
@@ -392,7 +435,7 @@
       <div class="footer__map">
         <iframe title="Mappa: Ristorante Di Gusto Macerata, Via XX Settembre 12"
           src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d2903.7263604921131!2d13.4501105!3d43.2990501!3m2!1i1024!2i768!4f13.1!2m1!1sRistorante+Di+Gusto+Macerata!6i17!3m1!1sit!5m1!1sit"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
 
@@ -402,6 +445,34 @@
     </div>
   </footer>
 
+  <!-- ============ MOBILE ACTION BAR ============ -->
+  <div class="callbar" aria-label="Azioni rapide">
+    <a href="tel:+390733474364" class="callbar__btn callbar__btn--main">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z" />
+      </svg>
+      Chiama e prenota
+    </a>
+    <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Ristorante+Di+Gusto,+Via+XX+Settembre+12,+62100+Macerata+MC"
+      target="_blank" rel="noopener" class="callbar__btn">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z" />
+        <circle cx="12" cy="10" r="2.5" />
+      </svg>
+      Indicazioni
+    </a>
+  </div>
+
+  <!-- ============ LIGHTBOX (gallery) ============ -->
+  <dialog class="lightbox" id="lightbox" aria-label="Foto del locale">
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" src="" alt="">
+      <figcaption class="lightbox__caption"></figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__close" type="button" aria-label="Chiudi">×</button>
+    <button class="lightbox__btn lightbox__prev" type="button" aria-label="Foto precedente">←</button>
+    <button class="lightbox__btn lightbox__next" type="button" aria-label="Foto successiva">→</button>
+  </dialog>
 
   <script src="script.js"></script>
 </body>
