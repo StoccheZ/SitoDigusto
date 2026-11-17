@@ -54,6 +54,7 @@
     "priceRange": "20-30 €",
     "servesCuisine": ["Italiana", "Vegana", "Cocktail bar"],
     "acceptsReservations": true,
+    "hasMenu": "https://digusto-lac.vercel.app/menu.html",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Via XX Settembre, 12",
@@ -93,6 +94,7 @@
       <nav class="nav" id="nav" aria-label="Navigazione principale">
         <a href="#chi-siamo">Chi siamo</a>
         <a href="#servizi">Servizi</a>
+        <a href="menu.html">Menu</a>
         <a href="#galleria">Il locale</a>
         <a href="#eventi">Eventi</a>
         <a href="#contatti">Contatti</a>
@@ -128,12 +130,6 @@
           <a href="tel:+390733474364" class="btn btn--solid">Prenota un tavolo</a>
           <a href="#asporto" class="btn btn--ghost">Ordina ora</a>
         </div>
-
-        <ul class="hero__meta intro" style="--i:6">
-          <li class="status" data-status hidden><span class="status__dot"></span><span class="status__text"></span></li>
-          <li>20–30 € a persona</li>
-          <li><a href="tel:+390733474364">0733 474364</a></li>
-        </ul>
       </div>
 
       <a href="#chi-siamo" class="hero__scroll intro" style="--i:7" aria-label="Scorri alla sezione successiva">
@@ -167,7 +163,7 @@
                 <span class="rating__fill" style="width:88%" aria-hidden="true">★★★★★</span>
                 <span class="rating__empty" aria-hidden="true">★★★★★</span>
               </div>
-              <figcaption>Il voto di oltre <strong>1.330 ospiti</strong> che sono passati da noi.<br>Grazie: è il nostro
+              <figcaption>Il voto di oltre <a class="rating__link" href="https://www.google.com/maps/place/Ristorante+Di+Gusto+Macerata/@43.299054,13.4475356,17z/data=!4m8!3m7!1s0x132d8b554890a255:0x97264b199ea6edc0!8m2!3d43.2990501!4d13.4501105!9m1!1b1!16s%2Fg%2F11bwyvn1l1" target="_blank" rel="noopener" aria-label="1.330 ospiti: leggi tutte le recensioni su Google (si apre in una nuova scheda)"><strong>1.330 ospiti</strong></a> che sono passati da noi.<br>Grazie: è il nostro
                 miglior biglietto da visita.</figcaption>
             </div>
           </figure>
@@ -264,6 +260,25 @@
               <a href="#eventi" class="card__link">Scopri gli eventi <span class="arrow">→</span></a>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MENU ============ -->
+    <section class="menu-cta section panel" id="menu">
+      <div class="container">
+        <div class="menu-cta__card reveal-group">
+          <svg class="menu-cta__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 3h9l3 3v15H6z" />
+            <path d="M15 3v3h3M9 11h6M9 14h6M9 17h4" />
+          </svg>
+          <p class="eyebrow">La nostra carta</p>
+          <h2 class="title">Vedi qui<br><em>il nostro menu</em></h2>
+          <p class="menu-cta__lead">Pinse, pizze, hamburger, cucina giapponese e la carta dei vini: sfoglia il menu completo prima di venirci a trovare.
+          </p>
+          <a href="menu.html" class="btn btn--solid">
+            Sfoglia il menu <span class="arrow">→</span>
+          </a>
         </div>
       </div>
     </section>
